@@ -1,17 +1,24 @@
 let participants = [];
 
 function addParticipant() {
-    const inputElement = document.getElementById('participant-input');
-    const participantName = inputElement.value.trim();
+    const nameInput = document.getElementById('participant-input');
+    const emailInput = document.getElementById('participant-email-input');
 
-    if (participantName !== '') {
-        participants.push(participantName);
-        inputElement.value = '';
+    const participantName = nameInput.value.trim();
+    const participantEmail = emailInput.value.trim();
+
+    // Verificar se o e-mail contém o domínio "@gmail.com"
+    if (participantName !== '' && participantEmail !== '' && participantEmail.toLowerCase().endsWith('@gmail.com')) {
+        participants.push({ name: participantName, email: participantEmail });
+        nameInput.value = '';
+        emailInput.value = '';
         displayParticipants();
 
         if (participants.length % 2 !== 0) {
             alert('Adicione mais um participante para formar pares.');
         }
+    } else {
+        alert('Por favor, insira um e-mail válido do Gmail.');
     }
 }
 
@@ -26,7 +33,7 @@ function displayParticipants() {
 
     participants.forEach(participant => {
         const participantElement = document.createElement('div');
-        participantElement.textContent = participant;
+        participantElement.textContent = `${participant.name} (${participant.email})`;
         participantElement.addEventListener('click', function() {
             removeParticipant(participant);
         });
@@ -35,6 +42,12 @@ function displayParticipants() {
 }
 
 function drawNames() {
+    const emailInput = document.getElementById('participant-email-input');
+    const eventTypeInput = document.getElementById('event-type-input');
+
+    const userEmail = emailInput.value.trim();
+    const eventType = eventTypeInput.value.trim();
+
     if (participants.length < 2 || participants.length % 2 !== 0) {
         alert('É necessário ter um número par de participantes para realizar o sorteio.');
         return;
@@ -53,9 +66,11 @@ function drawNames() {
 
     participants.forEach((participant, index) => {
         const resultElement = document.createElement('div');
-        resultElement.textContent = `${participant} -> ${shuffledParticipants[index]}`;
+        resultElement.textContent = `${participant.name} -> ${shuffledParticipants[index].name}`;
         resultContainer.appendChild(resultElement);
     });
+
+    // sendEmails(userEmail, eventType, participants, shuffledParticipants);
 }
 
 function shuffleArray(array) {
@@ -66,10 +81,8 @@ function shuffleArray(array) {
         [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
     }
 
-    // Verifica se há coincidências após embaralhar
-    const hasCoincidences = shuffledArray.some((name, index) => name === participants[index]);
+    const hasCoincidences = shuffledArray.some((participant, index) => participant.email === participants[index].email);
 
-    // Se houver coincidências, chama a função novamente para reembaralhar
     if (hasCoincidences) {
         return shuffleArray(array);
     }
@@ -81,20 +94,28 @@ function getDuplicateNames(array) {
     const countMap = new Map();
     const duplicates = [];
 
-    array.forEach(name => {
-        const count = countMap.get(name) || 0;
-        countMap.set(name, count + 1);
+    array.forEach(participant => {
+        const count = countMap.get(participant.email) || 0;
+        countMap.set(participant.email, count + 1);
 
         if (count === 1) {
-            duplicates.push(name);
+            duplicates.push(participant.name);
         }
     });
 
     return duplicates;
 }
 
-function removeParticipant(name) {
-    participants = participants.filter(participant => participant !== name);
+function removeParticipant(participant) {
+    participants = participants.filter(p => p.email !== participant.email);
     displayParticipants();
-    alert(`O participante ${name} foi removido.`);
+    alert(`O participante ${participant.name} (${participant.email}) foi removido.`);
+}
+
+function sendEmails(userEmail, eventType, originalList, shuffledList) {
+    console.log(`E-mail do usuário: ${userEmail}`);
+    console.log(`Tipo de Evento: ${eventType}`);
+    console.log('Lista Original:', originalList);
+    console.log('Lista Embaralhada:', shuffledList);
+    // Implemente a lógica para enviar e-mails aqui
 }

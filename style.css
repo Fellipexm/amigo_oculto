@@ -1,6 +1,6 @@
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #b22222; /* Azul escuro */
+    background-color: #b22222; /* Vermelho escuro */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,14 +11,21 @@ body {
 
 #texto {
     position: absolute;
-    top: 100px;
+    top: 20px;
+    font-size: 2em;
+    color: white;
 }
+
 
 img {
     position: absolute;
-    top: 185px;
-    width: 200px;
+    top: 330px;
+    left: 330px;
+    width: 300px;
+    height: 300px;
 }
+
+
 
 .snow-container {
     position: relative;
@@ -26,7 +33,6 @@ img {
 
 .snowflake {
     position: absolute;
-    align-items: center;
     width: 15px;
     height: 15px;
     background-color: #fff; /* Branco */
@@ -34,25 +40,9 @@ img {
     animation: snow-fall 10s linear infinite, twinkle 1s ease-in-out infinite;
 }
 
-
 .snowflake:nth-child(2),
 .snowflake:nth-child(3),
-.snowflake:nth-child(4),
-.snowflake:nth-child(5),
-.snowflake:nth-child(6),
-.snowflake:nth-child(7),
-.snowflake:nth-child(8),
-.snowflake:nth-child(9),
-.snowflake:nth-child(10),
-.snowflake:nth-child(11),
-.snowflake:nth-child(12),
-.snowflake:nth-child(13),
-.snowflake:nth-child(14),
-.snowflake:nth-child(15),
-.snowflake:nth-child(16),
-.snowflake:nth-child(17),
-.snowflake:nth-child(18),
-.snowflake:nth-child(19),
+
 .snowflake:nth-child(20) {
     width: 10px;
     height: 10px;
@@ -79,33 +69,53 @@ img {
 
 .container {
     position: relative;
-    z-index: 1; /* Para garantir que o conteúdo esteja acima da neve */
-    background-color: lightgreen; /* Amarelo */
+    z-index: 1; 
+    background-color: lightgreen; /* Verde claro */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 400px;
+    max-width: 600px;
     width: 100%;
+    color: #333; /* Cor do texto */
 }
 
-#participants-container {
-    margin-bottom: 20px;
+label {
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
 }
 
-#participant-input {
-    padding: 8px;
-    width: 60%;
-    margin-right: 8px;
+input,
+select,
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
 }
 
 button {
-    padding: 8px 16px;
-    cursor: pointer;
     background-color: #d9534f; /* Vermelho escuro */
     color: white;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
+}
+
+#participants-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+}
+
+#participant-input {
+    width: 48%;
+}
+
+#participant-email-input {
+    width: 48%;
 }
 
 #participants-list {
