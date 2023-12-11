@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amigo Oculto</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/image.webp">
+</head>
+<body>
+
+    <h1 id="texto">Amigo Oculto</h1>
+    <img src="assets/image.webp">
+  <div class="container snow-container">
+    <div class="snowflake"></div>
+    <div class="snowflake"></div>
+    <div class="snowflake"></div>
+    <div class="snowflake"></div>
+    <div class="snowflake"></div>
+ 
+    
+    <h1>Sortear Amigo Oculto</h1>
+    <p>Insira os nomes dos participantes:</p>
+    <form id="participant-form">
+      <div id="participants-container">
+        <input type="text" id="participant-input" placeholder="Nome do participante">
+        <button type="button" onclick="addParticipant()">Adicionar</button>
+      </div>
+    </form>
+    <button onclick="drawNames()">Revelar meu Amigo Secreto</button>
+    <div id="participants-list"></div>
+    <div id="result-container"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
