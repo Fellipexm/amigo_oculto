@@ -1,6 +1,28 @@
 let participants = [];
+let eventTypeConfirmed = false;
+
+function confirmEventType() {
+    const eventTypeInput = document.getElementById('event-type-input');
+    const confirmButton = document.getElementById('confirm-button');
+
+    if (eventTypeInput.value !== '') {
+        eventTypeConfirmed = true;
+        alert(`O sorteio está configurado para a ocasião: ${eventTypeInput.value}`);
+        
+        // Desabilita a seleção da ocasião e o botão de confirmação após a confirmação
+        eventTypeInput.disabled = true;
+        confirmButton.disabled = true;
+    } else {
+        alert('Por favor, selecione a ocasião antes de confirmar.');
+    }
+}
 
 function addParticipant() {
+    if (!eventTypeConfirmed) {
+        alert('Por favor, confirme a ocasião antes de adicionar participantes.');
+        return;
+    }
+
     const nameInput = document.getElementById('participant-input');
     const emailInput = document.getElementById('participant-email-input');
 
@@ -21,10 +43,14 @@ function addParticipant() {
     }
 }
 
-document.getElementById('participant-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-    addParticipant();
+document.getElementById('event-type-input').addEventListener('change', function () {
+    // Reinicia a confirmação da ocasião ao alterar a seleção
+    eventTypeConfirmed = false;
+    const confirmButton = document.getElementById('confirm-button');
+    confirmButton.disabled = false; // Habilita o botão de confirmação ao alterar a seleção
 });
+
+document.getElementById('confirm-button').addEventListener('click', confirmEventType);
 
 document.getElementById('share-button').addEventListener('click', function () {
     const link = generateShareLink();
@@ -185,11 +211,9 @@ function displayEventGreeting(eventType) {
             greeting = 'Saudações!';
     }
 
-    
     const greetingContainer = document.getElementById('greeting-container');
     greetingContainer.textContent = greeting;
     greetingContainer.style.display = 'block';
 
-    
     alert(greeting);
 }

@@ -34,6 +34,9 @@
       <option value="familia">Família</option>
     </select>
 
+    <!-- Botão "Confirmar" -->
+    <button id="confirm-button" onclick="confirmEventType()">Confirmar</button>
+
     <p>Insira os nomes e e-mails dos participantes:</p>
     <form id="participant-form">
       <div id="participants-container">
@@ -45,10 +48,8 @@
 
     <button onclick="drawNames()">Revelar meu Amigo Secreto</button>
 
-    
     <button id="share-button" onclick="displayShareLink()">Compartilhe</button>
 
- 
     <div id="share-link" style="display: none;">
       <p>Compartilhe este link com os participantes:</p>
       <div id="share-link-text"></div>
@@ -58,7 +59,7 @@
     <div id="result-container"></div>
   </div>
 
-<div id="greeting-container"></div>
+  <div id="greeting-container"></div>
 
   <script src="script.js"></script>
 </body>
