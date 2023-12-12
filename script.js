@@ -44,13 +44,20 @@ function displayShareLink(link) {
 }
 
 function promptUserForInfo(link) {
-    const userName = prompt('Digite seu nome:');
-    const userEmail = prompt('Digite seu e-mail do Gmail:');
+    const userInfoContainer = document.getElementById('user-info-container');
+    userInfoContainer.style.display = 'block';
+
+    document.getElementById('enter-draw-button').addEventListener('click', function () {
+        enterDraw(link);
+    });
+}
+
+function enterDraw(link) {
+    const userName = document.getElementById('user-name').value.trim();
+    const userEmail = document.getElementById('user-email').value.trim();
 
     if (userName && userEmail && userEmail.toLowerCase().endsWith('@gmail.com')) {
         sendUserDataToServer(userName, userEmail);
-
-        // Redirect to the shared link
         window.location.href = link;
     } else {
         alert('Por favor, forneça um nome e um e-mail válido do Gmail.');
@@ -115,7 +122,11 @@ function drawNames() {
         resultContainer.appendChild(resultElement);
     });
 
-    // sendEmails(userEmail, eventType, participants, shuffledParticipants);
+    displayEventGreeting(eventType);
+
+    // Limpar a lista de participantes após revelar o amigo secreto
+    participants = [];
+    displayParticipants();
 }
 
 function shuffleArray(array) {
@@ -157,10 +168,28 @@ function removeParticipant(participant) {
     alert(`O participante ${participant.name} (${participant.email}) foi removido.`);
 }
 
-function sendEmails(userEmail, eventType, originalList, shuffledList) {
-    console.log(`E-mail do usuário: ${userEmail}`);
-    console.log(`Tipo de Evento: ${eventType}`);
-    console.log('Lista Original:', originalList);
-    console.log('Lista Embaralhada:', shuffledList);
-    // Implemente a lógica para enviar e-mails aqui
+function displayEventGreeting(eventType) {
+    let greeting = '';
+
+    switch (eventType) {
+        case 'amigos':
+            greeting = 'Viva a amizade!';
+            break;
+        case 'colegas':
+            greeting = 'Que seu 2024 seja repleto de muitas realizações profissionais!';
+            break;
+        case 'familia':
+            greeting = 'Boas festas em família!';
+            break;
+        default:
+            greeting = 'Saudações!';
+    }
+
+    // Exibir saudação no novo elemento HTML
+    const greetingContainer = document.getElementById('greeting-container');
+    greetingContainer.textContent = greeting;
+    greetingContainer.style.display = 'block';
+
+    // Também exibindo um alerta como antes (opcional)
+    alert(greeting);
 }

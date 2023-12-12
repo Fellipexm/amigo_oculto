@@ -134,6 +134,14 @@ button {
     top: 30px;
 }
 
+#greeting-container {
+    position: absolute;
+    top: 850px;
+   text-align: center;
+    font-size: 30px;
+    color: aliceblue;
+}
+
 @media screen and (max-width: 600px) {
     body {
         justify-content: flex-start;
@@ -147,3 +155,5 @@ button {
         max-width: 100%;
     }
 }
+
+
