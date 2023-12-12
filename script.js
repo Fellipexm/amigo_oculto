@@ -185,11 +185,11 @@ function displayEventGreeting(eventType) {
             greeting = 'Saudações!';
     }
 
-    // Exibir saudação no novo elemento HTML
+    
     const greetingContainer = document.getElementById('greeting-container');
     greetingContainer.textContent = greeting;
     greetingContainer.style.display = 'block';
 
-    // Também exibindo um alerta como antes (opcional)
+    
     alert(greeting);
 }
