@@ -9,7 +9,7 @@ function confirmEventType() {
         eventTypeConfirmed = true;
         alert(`O sorteio está configurado para a ocasião: ${eventTypeInput.value}`);
         
-        // Desabilita a seleção da ocasião e o botão de confirmação após a confirmação
+        
         eventTypeInput.disabled = true;
         confirmButton.disabled = true;
     } else {
@@ -44,10 +44,10 @@ function addParticipant() {
 }
 
 document.getElementById('event-type-input').addEventListener('change', function () {
-    // Reinicia a confirmação da ocasião ao alterar a seleção
+   
     eventTypeConfirmed = false;
     const confirmButton = document.getElementById('confirm-button');
-    confirmButton.disabled = false; // Habilita o botão de confirmação ao alterar a seleção
+    confirmButton.disabled = false; 
 });
 
 document.getElementById('confirm-button').addEventListener('click', confirmEventType);
@@ -150,7 +150,7 @@ function drawNames() {
 
     displayEventGreeting(eventType);
 
-    // Limpar a lista de participantes após revelar o amigo secreto
+  
     participants = [];
     displayParticipants();
 }
