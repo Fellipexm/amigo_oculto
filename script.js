@@ -7,7 +7,6 @@ function addParticipant() {
     const participantName = nameInput.value.trim();
     const participantEmail = emailInput.value.trim();
 
-    // Verificar se o e-mail contém o domínio "@gmail.com"
     if (participantName !== '' && participantEmail !== '' && participantEmail.toLowerCase().endsWith('@gmail.com')) {
         participants.push({ name: participantName, email: participantEmail });
         nameInput.value = '';
@@ -22,10 +21,56 @@ function addParticipant() {
     }
 }
 
-document.getElementById('participant-form').addEventListener('submit', function(event) {
+document.getElementById('participant-form').addEventListener('submit', function (event) {
     event.preventDefault();
     addParticipant();
 });
+
+document.getElementById('share-button').addEventListener('click', function () {
+    const link = generateShareLink();
+    displayShareLink(link);
+});
+
+function generateShareLink() {
+    const uniqueIdentifier = Date.now();
+    return `${window.location.origin}${window.location.pathname}?session=${uniqueIdentifier}`;
+}
+
+function displayShareLink(link) {
+    const shareLinkText = document.getElementById('share-link-text');
+    shareLinkText.textContent = link;
+    const shareLinkElement = document.getElementById('share-link');
+    shareLinkElement.style.display = 'block';
+}
+
+function promptUserForInfo(link) {
+    const userName = prompt('Digite seu nome:');
+    const userEmail = prompt('Digite seu e-mail do Gmail:');
+
+    if (userName && userEmail && userEmail.toLowerCase().endsWith('@gmail.com')) {
+        sendUserDataToServer(userName, userEmail);
+
+        // Redirect to the shared link
+        window.location.href = link;
+    } else {
+        alert('Por favor, forneça um nome e um e-mail válido do Gmail.');
+    }
+}
+
+function sendUserDataToServer(userName, userEmail) {
+    fetch('http://localhost:3000/share-link', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ participants, user: userName, email: userEmail }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Server response:', data);
+        })
+        .catch(error => console.error('Error sending data to server:', error));
+}
 
 function displayParticipants() {
     const participantsList = document.getElementById('participants-list');
@@ -34,7 +79,7 @@ function displayParticipants() {
     participants.forEach(participant => {
         const participantElement = document.createElement('div');
         participantElement.textContent = `${participant.name} (${participant.email})`;
-        participantElement.addEventListener('click', function() {
+        participantElement.addEventListener('click', function () {
             removeParticipant(participant);
         });
         participantsList.appendChild(participantElement);

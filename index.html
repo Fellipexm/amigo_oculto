@@ -10,13 +10,12 @@
 <body>
 
   <h1 id="texto">Amigo Oculto</h1>
- <div class="paragrafo">
-   <p style="position: absolute; left: 230px; top:130px; font-size:20px; color:white;">Desvendando mistérios e compartilhando sorrisos, o sistema perfeito para o Amigo Oculto que transforma a diversão em presentes incríveis!</p>
-
- </div>
+  <div class="paragrafo">
+    <p style="position: absolute; left: 230px; top:60px; font-size:20px; color:white;">Desvendando mistérios e compartilhando sorrisos, o sistema perfeito para o Amigo Oculto que transforma a diversão em presentes incríveis!</p>
+  </div>
   <img src="assets/screto.png">
   <div class="papai">
-  <img src="assets/noelpap.png">
+    <img src="assets/noelpap.png">
   </div>
 
   <div class="container snow-container">
@@ -45,6 +44,15 @@
     </form>
 
     <button onclick="drawNames()">Revelar meu Amigo Secreto</button>
+
+    
+    <button id="share-button" onclick="displayShareLink()">Compartilhe</button>
+
+ 
+    <div id="share-link" style="display: none;">
+      <p>Compartilhe este link com os participantes:</p>
+      <div id="share-link-text"></div>
+    </div>
 
     <div id="participants-list"></div>
     <div id="result-container"></div>
