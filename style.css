@@ -64,7 +64,8 @@ img {
 }
 
 .container {
-    position: relative;
+    position: absolute;
+    top:150px;
     z-index: 1;
     background-color: lightgreen;
     padding: 20px;
@@ -74,6 +75,7 @@ img {
     max-width: 600px;
     width: 100%;
     color: #333;
+    height: 700px;
 }
 
 label {
@@ -114,12 +116,15 @@ button {
 }
 
 #participants-list {
+    position: absolute;
+    top: 660px; /* Ajuste o valor conforme necessário para posicionar a lista mais para baixo */
     margin-bottom: 20px;
     text-align: left;
     font-family: 'Times New Roman', Times, serif;
     font-size: 19px;
     color: #228B22;
 }
+
 
 #result-container {
     margin-top: 20px;
@@ -141,6 +146,8 @@ button {
     font-size: 30px;
     color: aliceblue;
 }
+
+
 
 @media screen and (max-width: 600px) {
     body {
